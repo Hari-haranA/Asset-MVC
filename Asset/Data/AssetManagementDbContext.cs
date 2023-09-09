@@ -5,7 +5,7 @@
 
     public class AssetManagementDbContext : DbContext
     {
-        public AssetManagementDbContext() : base("name=DefaultConnection")
+        public AssetManagementDbContext() : base()
         {
         }
 

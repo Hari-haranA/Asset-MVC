@@ -68,7 +68,7 @@
             min-width: 160px;
             box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
             z-index: 1;
-            bottom: -10px;
+            bottom: -20px;
             left: 50%;
             transform: translateX(-50%);
         }
@@ -119,48 +119,47 @@
 
     <div class="container">
         <div class="rectangle">
-            <div class="dropdown-arrow"></div>
+            <p class="py-5 text-warning">Asset Management</p>
             <div class="dropdown-content">
                 <a href="@Url.Action("CreateAsset", "AssetManagement")">Create Asset</a>
                 <a href="@Url.Action("ViewAssets", "AssetManagement")">View Assets</a>
                 <!-- Add more functions and links as needed -->
             </div>
-            Asset Management
+            
         </div>
 
         <div class="rectangle">
-            <div class="dropdown-arrow"></div>
+            <p class="py-5 text-warning">Vendor Management</p>
             <div class="dropdown-content">
                 <a href="@Url.Action("CreateVendor", "VendorManagement")">Create Vendor</a>
                 <a href="@Url.Action("ViewVendors", "VendorManagement")">View Vendors</a>
                 <!-- Add more functions and links as needed -->
-            </div>
-            Vendor Management
+            </div> 
         </div>
 
         <div class="rectangle">
-            <div class="dropdown-arrow"></div>
+            <p class="py-5 text-warning">Purchase Management</p>
             <div class="dropdown-content">
                 <a href="@Url.Action("CreatePurchase", "PurchaseManagement")">Create Purchase</a>
                 <a href="@Url.Action("ViewPurchases", "PurchaseManagement")">View Purchases</a>
                 <a href="@Url.Action("CreateAssetTransfer", "PurchaseManagement")">Create Asset Transfer</a>
                 <!-- Add more functions and links as needed -->
             </div>
-            Purchase Management
+            
         </div>
 
         <div class="rectangle">
-            <div class="dropdown-arrow"></div>
+            <p class="py-5 text-warning">Sales Management</p>
             <div class="dropdown-content">
                 <a href="@Url.Action("CreateSale", "SalesManagement")">Create Sale</a>
                 <a href="@Url.Action("ViewSales", "SalesManagement")">View Sales</a>
                 <!-- Add more functions and links as needed -->
             </div>
-            Sales Management
+            
         </div>
 
         <div class="rectangle">
-            <div class="dropdown-arrow"></div>
+            <p class="py-5 text-warning">Stock Details</p>
             <div class="dropdown-content">
                 <a href="@Url.Action("BranchWiseStock", "StockDetails")">Branch Wise Stock</a>
                 <a href="@Url.Action("AssetWiseStock", "StockDetails")">Asset Wise Stock</a>
@@ -168,17 +167,17 @@
                 <a href="@Url.Action("AssetSubSectionWiseStock", "StockDetails")">Asset Sub Section Wise Stock</a>
                 <!-- Add more functions and links as needed -->
             </div>
-            Stock Details
+            
         </div>
 
         <div class="rectangle">
-            <div class="dropdown-arrow"></div>
+            <p class="py-5 text-warning">Reports</p>
             <div class="dropdown-content">
                 <a href="@Url.Action("AssetTransactionList", "Reports")">Asset Transaction List</a>
                 <a href="@Url.Action("PurchaseAmountWise", "Reports")">Purchase Amount Wise</a>
                 <!-- Add more functions and links as needed -->
             </div>
-            Reports
+            
         </div>
     </div>
 

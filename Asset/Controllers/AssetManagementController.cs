@@ -1,4 +1,6 @@
-﻿using Asset.Data;
+﻿
+
+using Asset.Data;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Asset.Controllers
@@ -14,12 +16,33 @@ namespace Asset.Controllers
             return View();
         }
 
+        public ActionResult CreateSection()
+        {
+            return View();
+        }
+
+        public ActionResult CreateSubSection()
+        {
+            return View();
+        }
+
         // Action for viewing assets
         public ActionResult ViewAssets()
         {
             // Implement logic for viewing assets (CRUD operations)
-            var assets = db.Assets.ToList();
-            return View(assets);
+            return View();
+        }
+
+        public ActionResult ViewAssetsSection()
+        {
+            // Implement logic for viewing assets (CRUD operations)
+            return View();
+        }
+
+        public ActionResult ViewAssetsSubSection()
+        {
+            // Implement logic for viewing assets (CRUD operations)
+            return View();
         }
 
         // Other CRUD actions for assets
