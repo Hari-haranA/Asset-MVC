@@ -1,0 +1,34 @@
+﻿using Asset.Data;
+using Microsoft.AspNetCore.Mvc;
+
+namespace Asset.Controllers
+{
+    public class PurchaseManagementController : Controller
+    {
+        private AssetManagementDbContext db = new AssetManagementDbContext();
+
+        // Action for Purchase Entry (Create)
+        public ActionResult CreatePurchase()
+        {
+            // Implement logic for creating purchase entries
+            return View();
+        }
+
+        // Action for viewing purchase entries
+        public ActionResult ViewPurchases()
+        {
+            // Implement logic for viewing purchase entries (search by branch or purchase ID)
+            var purchases = db.PurchaseEntries.ToList();
+            return View(purchases);
+        }
+
+        // Action for Asset Transfer Entry (Create)
+        public ActionResult CreateAssetTransfer()
+        {
+            // Implement logic for creating asset transfer entries
+            return View();
+        }
+
+        // Other actions for CRUD operations in purchase management
+    }
+}

@@ -1,0 +1,107 @@
+﻿@model LoginModel
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <style>
+        body {
+            background-color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .login-box {
+            background-color: yellow;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            width: 300px;
+            text-align: center;
+        }
+
+            .login-box h2 {
+                color: navy;
+                font-weight: bold;
+                margin-bottom: 20px;
+            }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+            .form-group label {
+                color: navy;
+                font-weight: bold;
+                display: block;
+                margin-bottom: 5px;
+            }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid navy;
+            border-radius: 3px;
+            font-size: 16px;
+        }
+
+        .checkbox label {
+            color: navy;
+            font-weight: bold;
+        }
+
+        .btn {
+            background-color: navy;
+            color: yellow;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <h2>Login</h2>
+            <form method="post">
+                <div class="form-group">
+                    <label for="UserName">Username</label>
+                    <input type="text"  class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="Password">Password</label>
+                    <input type="password"  class="form-control" />
+                </div>
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" /> Remember me
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Log in" class="btn" />
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+
