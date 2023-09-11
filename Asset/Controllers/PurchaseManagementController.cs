@@ -18,8 +18,13 @@ namespace Asset.Controllers
         public ActionResult ViewPurchases()
         {
             // Implement logic for viewing purchase entries (search by branch or purchase ID)
-            var purchases = db.Purchase_Entry.ToList();
-            return View(purchases);
+         //   var purchases = db.Purchase_Entry.ToList();
+            return View();
+        }
+
+        public ActionResult EditPurchases()
+        {
+            return View();
         }
 
         // Action for Asset Transfer Entry (Create)
