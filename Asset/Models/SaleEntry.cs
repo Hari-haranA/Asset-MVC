@@ -45,11 +45,11 @@
         [ForeignKey("VENDOR_CODE")]
         public virtual Vendor Vendor { get; set; }
 
-        [ForeignKey("A_ID")]
-        public virtual Asset Asset { get; set; }
+        //[ForeignKey("A_ID")]
+        //public virtual Assets Asset { get; set; }
 
-        [ForeignKey("ASEC_ID")]
-        public virtual AssetSection AssetSection { get; set; }
+        //[ForeignKey("ASEC_ID")]
+        //public virtual AssetSection AssetSection { get; set; }
 
         [ForeignKey("ASUBSEC_ID")]
         public virtual AssetSubSection AssetSubSection { get; set; }

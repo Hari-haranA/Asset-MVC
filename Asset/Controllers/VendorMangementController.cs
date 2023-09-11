@@ -18,7 +18,7 @@ namespace Asset.Controllers
         public ActionResult ViewVendors()
         {
             // Implement logic for viewing vendors (CRUD operations)
-            var vendors = db.Vendors.ToList();
+            var vendors = db.Vendor.ToList();
             return View(vendors);
         }
 
