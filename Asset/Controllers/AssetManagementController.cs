@@ -45,6 +45,21 @@ namespace Asset.Controllers
             return View();
         }
 
+        public ActionResult EditAsset()
+        {
+            return View();
+        }
+
+        public ActionResult EditSection()
+        {
+            return View();
+        }
+
+        public ActionResult EditSubSection() 
+        {
+            return View();
+        }
+
         // Other CRUD actions for assets
     }
 }

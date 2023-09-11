@@ -1,7 +1,7 @@
 ﻿@model Vendor
 
 @{
-    ViewData["Title"] = "ViewVendor";
+    ViewData["Title"] = "ViewVendors";
 }
 
 <h5 class="text-center mt-3">CreateVendor</h5>
@@ -28,8 +28,8 @@
         </div>
         <div class="col-8">
             <div class="d-inline-flex">
-                <button class="btn btn-primary" type="submit">Edit</button>
-                <button class="btn btn-primary mx-3" type="submit">Details</button>
+                <a asp-controller="VendorManagement" asp-action="EditVendor" class="btn btn-primary">Edit</a>
+                <a asp-controller="VendorManagement" asp-action="DetailsVendor" class="btn btn-primary mx-3">Details</a>
                 <button class="btn btn-primary" type="submit">Delete</button>
             </div>
         </div>

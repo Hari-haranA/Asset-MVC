@@ -1,23 +1,17 @@
-﻿<h5 class="text-center p-3">View Asset</h5>
-<section>
-    <a asp-controller="AssetManagement" asp-action="ViewAssets">
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Asset">
-            <label class="form-check-label" for="inlineRadio1"><b>Asset Type</b></label>
-        </div>
-    </a>
-    <a asp-controller="AssetManagement" asp-action="ViewAssetsSection">
-        <div class="form-check px-5 form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="Asset">
-            <label class="form-check-label" for="inlineRadio2"><b>Asset Section Type</b></label>
-        </div>
-    </a>
-
-    <a asp-controller="AssetManagement" asp-action="ViewAssetsSubSection">
-    <div class="form-check px-3 form-check-inline">
-        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="Asset">
+﻿<h5 class="text-center p-3">View Asset SubSection</h5>
+<section class="d-flex">
+    <div>
+        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1">
+        <label class="form-check-label" for="inlineRadio1"><b>Asset Type</b></label>
+    </div>
+    <div class="px-3">
+        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="2">
+        <label class="form-check-label" for="inlineRadio2"><b>Asset Section Type</b></label>
+    </div>
+    <div class="px-3">
+        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="3">
         <label class="form-check-label" for="inlineRadio2"><b>Asset Sub Section Type</b></label>
-    </div></a>
+    </div>
 </section>
 
 <section class="container-fluid bg-light mt-3 py-5">
@@ -48,9 +42,54 @@
         </div>
         <div class="col-2">
             <div class="d-inline-flex">
-                <button class="btn btn-primary" type="submit">Edit</button>
-                <button class="btn btn-primary mx-3" type="submit">Delete</button>
+                <a asp-action="EditSubSection" class="btn btn-primary" type="submit">Edit</a>
+                <a asp-controller="Dashboard" asp-action="Dashboard" class="btn btn-primary mx-3" type="submit">Back</a>
             </div>
         </div>
     </div>
 </section>
+<script>
+    // Get all the radio buttons
+    var radioButtons = document.querySelectorAll('input[name="inlineRadioOptions"]');
+
+    // Loop through each radio button and add a click event listener
+    radioButtons.forEach(function (radioButton) {
+        radioButton.addEventListener('click', function () {
+            // Check if this radio button is checked
+            if (radioButton.checked) {
+                // Get the value of the radio button
+                var selectedValue = radioButton.value;
+
+                // Determine the URL to redirect to based on the selected value
+                var redirectUrl = '';
+
+                switch (selectedValue) {
+                    case '1':
+                        redirectUrl = '/AssetManagement/ViewAssets';
+                        break;
+                    case '2':
+                        redirectUrl = '/AssetManagement/ViewAssetsSection';
+                        break;
+                    case '3':
+                        redirectUrl = '/AssetManagement/ViewAssetsSubSection';
+                        break;
+                    // Add more cases for other values if needed
+
+                    default:
+                        // Handle default case or error
+                        break;
+                }
+
+                // Redirect to the determined URL
+                if (redirectUrl) {
+                    window.location.href = redirectUrl;
+                }
+            }
+        });
+    });
+</script>
+<style>
+    input[type="radio"]:checked + label {
+        color: navy; /* Change this to the desired text color */
+    }
+</style>

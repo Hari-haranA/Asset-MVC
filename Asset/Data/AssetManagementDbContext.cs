@@ -5,10 +5,9 @@
 
     public class AssetManagementDbContext : DbContext
     {
-        public AssetManagementDbContext() : base()
+        public AssetManagementDbContext() : base("DefaultConnection")
         {
         }
-
         public DbSet<Asset> Assets { get; set; }
         public DbSet<AssetSection> AssetSections { get; set; }
         public DbSet<AssetSubSection> AssetSubSections { get; set; }
