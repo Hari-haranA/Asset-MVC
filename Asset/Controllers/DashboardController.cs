@@ -5,7 +5,7 @@ namespace Asset.Controllers
 {
     public class DashboardController : Controller
     {
-        //[Authorize]
+        [Authorize]
         public IActionResult Dashboard()
         {
             return View();

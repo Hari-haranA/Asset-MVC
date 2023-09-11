@@ -4,15 +4,13 @@ using Asset.Data;
 using Asset.Models;
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'AssetContextConnection' not found.");
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
 // Add Identity services and configure them
-builder.Services.AddIdentity<LoginModel, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDbContext<LoginDbContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<LoginDbContext>()
     .AddDefaultTokenProviders();
-builder.Services.AddDbContext<LoginDbContext>(options => options.UseSqlServer(connectionString));   
-//builder.Services.AddDbContext<LoginDbContext>(options => options.UseSqlServer(connectionString));
-//builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<LoginDbContext>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -31,11 +29,11 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-//app.UseAuthentication(); // Middleware for authentication
+app.UseAuthentication(); // Middleware for authentication
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Dashboard}/{action=Dashboard}/{id?}");
+    pattern: "{controller=Account}/{action=Login}/{id?}");
 
 app.Run();

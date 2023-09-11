@@ -1,0 +1,22 @@
+﻿@model Microsoft.AspNetCore.Identity.IdentityUser
+
+<form asp-controller="Account" asp-action="Register" method="post">
+   
+    <div class="form-group">
+        <label asp-for="UserName">Username</label>
+        <input asp-for="UserName" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Email">Email</label>
+        <input asp-for="Email" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="PasswordHash">Password</label>
+        <input asp-for="PasswordHash" type="password" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="NormalizedUserName">Name</label>
+        <input asp-for="NormalizedUserName" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Register</button>
+</form>
