@@ -18,7 +18,7 @@ namespace Asset.Controllers
         public ActionResult ViewSales()
         {
             // Implement logic for viewing sales entries (search by branch or sale ID)
-            var sales = db.SaleEntries.ToList();
+            var sales = db.Sale_Entry.ToList();
             return View(sales);
         }
 

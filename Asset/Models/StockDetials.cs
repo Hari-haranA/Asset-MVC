@@ -27,11 +27,11 @@
         [ForeignKey("BRCODE")]
         public virtual Branch Branch { get; set; }
 
-        [ForeignKey("ASSET_ID")]
-        public virtual Asset Asset { get; set; }
+        //[ForeignKey("ASSET_ID")]
+        //public virtual Assets Asset { get; set; }
 
-        [ForeignKey("SECTION_ID")]
-        public virtual AssetSection AssetSection { get; set; }
+        //[ForeignKey("SECTION_ID")]
+        //public virtual AssetSection AssetSection { get; set; }
 
         [ForeignKey("SUBSEC_ID")]
         public virtual AssetSubSection AssetSubSection { get; set; }

@@ -1,7 +1,10 @@
 ﻿
 
 using Asset.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Asset.Models;
+using System.Data.Entity;
 
 namespace Asset.Controllers
 {
@@ -12,37 +15,72 @@ namespace Asset.Controllers
         // Action for Asset Creation
         public ActionResult CreateAsset()
         {
-            // Implement logic for creating assets
             return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> CreateAsset(CreateAssetView createAssetView)
+        {
+            if (ModelState!=null)
+            {
+                db.Assets.Add(createAssetView.Asset);
+                db.Asset_Section.Add(createAssetView.AssetSection);
+                db.Asset_Sub_Section.Add(createAssetView.AssetSubSection);
+                await db.SaveChangesAsync();
+                return RedirectToAction("ViewAssets");
+            }
+
+            return View(createAssetView);
         }
 
         public ActionResult CreateSection()
         {
             return View();
         }
+        [HttpPost]
+        public async Task<ActionResult> CreateSection(AssetSection section)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Asset_Section.Add(section);
+                await db.SaveChangesAsync();
+                return RedirectToAction("ViewAssetsSection");
+            }
 
+            return View(section);
+        }   
         public ActionResult CreateSubSection()
         {
             return View();
         }
+        [HttpPost]
+        public async Task<ActionResult> CreateSubSection(AssetSubSection subsection)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Asset_Sub_Section.Add(subsection);
+                await db.SaveChangesAsync();
+                return RedirectToAction("ViewAssetsSubSection");
+            }
+
+            return View(subsection);
+        }
 
         // Action for viewing assets
-        public ActionResult ViewAssets()
+       public async Task<ActionResult> ViewAssets()
         {
-            // Implement logic for viewing assets (CRUD operations)
-            return View();
+            return db.Assets != null ?
+                View(await db.Assets.ToListAsync()) : Problem("Table is Null.");
         }
-
-        public ActionResult ViewAssetsSection()
+        public async Task<ActionResult> ViewAssetsSection()
         {
-            // Implement logic for viewing assets (CRUD operations)
-            return View();
+            return db.Asset_Section != null ?
+                View(await db.Asset_Section.ToListAsync()) : Problem("Table is Null.");
         }
-
-        public ActionResult ViewAssetsSubSection()
+        public async Task<ActionResult> ViewAssetsSubSection()
         {
-            // Implement logic for viewing assets (CRUD operations)
-            return View();
+            return db.Asset_Sub_Section != null ?
+                View(await db.Asset_Sub_Section.ToListAsync()) : Problem("Table is Null.");
         }
 
         public ActionResult EditAsset()

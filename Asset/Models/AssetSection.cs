@@ -18,7 +18,7 @@ public class AssetSection
     public string Name { get; set; }
 
     [ForeignKey("AssetId")]
-    public virtual Asset Asset { get; set; }
+    public virtual Assets Asset { get; set; }
 
     public virtual ICollection<AssetSubSection> SubSections { get; set; }
 }

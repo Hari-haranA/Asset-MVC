@@ -27,8 +27,8 @@
         [ForeignKey("PID")]
         public virtual PBill PBill { get; set; }
 
-        [ForeignKey("FROM_BRANCH")]
-        public virtual Branch FromBranch { get; set; }
+        //[ForeignKey("FROM_BRANCH")]
+        //public virtual Branch FromBranch { get; set; }
 
         [ForeignKey("TO_BRANCH")]
         public virtual Branch ToBranch { get; set; }
