@@ -1,0 +1,37 @@
+﻿@model Vendor
+
+@{
+    ViewData["Title"] = "ViewVendor";
+}
+
+<h5 class="text-center mt-3">CreateVendor</h5>
+
+<section class="bg-light mt-3 px-5 py-5">
+
+    <a asp-controller="VendorManagement" asp-action="CreateVendor"><b class="ps-1">Add Vendor Details</b></a>
+    <div class="row mt-2 ">
+        <div class="col-4">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">COMPANY CODE</th>
+                        <th scope="col">COMPANY NAME</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>001</td>
+                        <td>POTHYS</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-8">
+            <div class="d-inline-flex">
+                <button class="btn btn-primary" type="submit">Edit</button>
+                <button class="btn btn-primary mx-3" type="submit">Details</button>
+                <button class="btn btn-primary" type="submit">Delete</button>
+            </div>
+        </div>
+    </div>
+</section>
