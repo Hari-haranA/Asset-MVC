@@ -34,7 +34,7 @@
         //public virtual AssetSection AssetSection { get; set; }
 
         [ForeignKey("SUBSEC_ID")]
-        public virtual AssetSubSection AssetSubSection { get; set; }
+        public virtual Asset_Sub_Section AssetSubSection { get; set; }
     }
 
 }

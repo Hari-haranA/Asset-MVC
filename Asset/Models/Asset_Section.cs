@@ -4,21 +4,20 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-public class AssetSection
+public class Asset_Section
 {
     [Key]
-    public int SectionId { get; set; }
+    public int Section_Id { get; set; }
 
-    [Required]
-    public int AssetId { get; set; }
+    public int Asset_Id { get; set; }
 
-    [Required]
+    
     [MaxLength(30)]
     [Index(IsUnique = true)]
     public string Name { get; set; }
 
-    [ForeignKey("AssetId")]
+    [ForeignKey("Asset_Id")]
     public virtual Assets Asset { get; set; }
 
-    public virtual ICollection<AssetSubSection> SubSections { get; set; }
+    public virtual ICollection<Asset_Sub_Section> SubSections { get; set; }
 }

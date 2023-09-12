@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 public class Vendor
 {
     [Key]
-    public int VendorCode { get; set; }
+    public int Vendor_Code { get; set; }
 
     [Required]
     [MaxLength(30)]
@@ -14,18 +14,18 @@ public class Vendor
 
     [Required]
     [MaxLength(30)]
-    public string PersonName { get; set; }
+    public string Person_Name { get; set; }
 
     [Required]
-    public long MobileNo { get; set; }
+    public long Mobile_No { get; set; }
 
-    public long? PhoneNo { get; set; }
+    public long? Phone_No { get; set; }
 
     [Required]
     [MaxLength(50)]
     public string VAddress { get; set; }
 
-    [Required]
+    
     [MaxLength(15)]
     public string City { get; set; }
 
@@ -36,13 +36,13 @@ public class Vendor
     [Required]
     [MaxLength(20)]
     //[Index(IsUnique = true)]
-    public string GSTNo { get; set; }
+    public string GST_No { get; set; }
 
     [Required]
     [MaxLength(10)]
     //[Index(IsUnique = true)]
-    public string PANNo { get; set; }
+    public string PAN_No { get; set; }
 
     [MaxLength(20)]
-    public string TINNo { get; set; }
+    public string TIN_No { get; set; }
 }

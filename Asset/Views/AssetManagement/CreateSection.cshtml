@@ -1,4 +1,5 @@
-﻿<h5 class="text-center p-3">Asset Creation</h5>
+﻿@model Asset.Models.CreateSectionView
+<h5 class="text-center p-3">Asset Creation</h5>
 <section class="d-flex">
     <div>
         <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1">
@@ -13,32 +14,32 @@
         <label class="form-check-label" for="inlineRadio2"><b>Asset Sub Section Type</b></label>
     </div>
 </section>
-
+<form asp-action="CreateSection">
 <section class="container-fluid bg-light mt-3 py-5">
     <p class="px-2"><b>Asset Type</b></p>
     <div class="row">
         <div class="col-6">
             <div class="form-group">
                 <label class="control-label d-flex">Asset Type</label>
-                <select class="form-select" aria-label="Default select example">
-                <option selected>001 - Furniture</option>
-                <option value="1">002 - Machine</option>
-                <option value="2">003 - Automobiles</option>
-            </select>
+                <select class="form-select" id="assetTypeDropdown" aria-label="Asset Type">
+                    <option value="">Select Asset Type</option>
+                </select>
             </div>
-            </div></div>
-
+        </div>
+</div>
+    <!-- Container for asset sections -->
+    <div id="assetSectionsContainer"></div>
             <p class="py-2"><b>Asset Section Type</b></p>
             <div class="row">
               <div class="col-6">
-            <div class="form-group">
+           @*  <div class="form-group">
                 <label class="control-label d-flex">Section Code</label>
                 <input class="form-control" />
-            </div>
+            </div> *@
 
             <div class="form-group">
                 <label class="control-label d-flex">Section Name</label>
-                <input class="form-control" />
+                    <input type="text" asp-for="SectionName" class="form-control" />
             </div>
         </div>
             </div>
@@ -46,22 +47,65 @@
             <p class="py-2"><b>Asset Sub Section Type</b></p>
             <div class="row">
                 <div class="col-6">
-            <div class="form-group">
+           @*  <div class="form-group">
                 <label class="control-label d-flex">Sub Section Code</label>
                 <input class="form-control" />
-            </div>
+            </div> *@
 
             <div class="form-group">
-                <label class="control-label d-flex">Sub Section Name</label>
-                <input class="form-control" />
+                <label class="control-label d-flex">Sub-Section Name</label>
+                    <input type="text" asp-for="SubSectionName" class="form-control" />
             </div>
         </div>
     </div> 
     <div class="d-inline-flex mt-3 justify-content-center">
-        <a asp-action="ViewAssetsSection" class="btn btn-primary">Save</a>
-     <a asp-controller="Dashboard" asp-action="Dashboard" class="btn btn-primary mx-3">Cancel</a>
+        <button type="submit" class="btn btn-success">Save</button>
+     <a asp-controller="Dashboard" asp-action="Dashboard" class="btn btn-danger mx-3">Cancel</a>
     </div>
 </section>
+</form>
+<script>
+    document.querySelector('form').addEventListener('submit', function (event) {
+        const assetTypeDropdown = document.getElementById('assetTypeDropdown');
+        if (assetTypeDropdown.value === '') {
+            event.preventDefault(); // Prevent form submission if no asset type is selected
+        }
+    });
+</script>
+<script>
+    // Function to populate the asset type dropdown
+    function populateAssetTypeDropdown() {
+        console.log("Populating asset type dropdown...");
+        const assetTypeDropdown = document.getElementById("assetTypeDropdown");
+
+        // Make an AJAX request to fetch asset types
+        fetch("/AssetManagement/sectionjson")
+            .then((response) => response.json())
+            .then((data) => {
+                // Log the retrieved data to the console for debugging
+                console.log("Retrieved data:", data);
+
+                // Iterate through the retrieved asset types and add them to the dropdown
+                data.forEach((asset) => {
+                    const option = document.createElement("option");
+                    option.value = asset.assetId; // Use the correct property name
+
+                   // console.log("Asset Id:", asset.AssetId);
+                   // console.log("Asset Name:", asset.AssetName);
+                    option.text = `${asset.assetId} - ${asset.assetName}`; // Use the correct property name
+                    assetTypeDropdown.appendChild(option);
+                });
+            })
+            .catch((error) => {
+                // Log any errors to the console for debugging
+                console.error("Error fetching asset types: ", error);
+            });
+    }
+
+    // Call the function to populate the asset type dropdown
+    populateAssetTypeDropdown();
+
+</script>
 <script>
     // Get all the radio buttons
     var radioButtons = document.querySelectorAll('input[name="inlineRadioOptions"]');
@@ -73,7 +117,6 @@
             if (radioButton.checked) {
                 // Get the value of the radio button
                 var selectedValue = radioButton.value;
-
                 // Determine the URL to redirect to based on the selected value
                 var redirectUrl = '';
 
@@ -101,7 +144,7 @@
             }
         });
     });
-</script>
+    </script>
 <style>
     input[type="radio"]:checked {
         background-color: blue; /* Change this to the desired background color */

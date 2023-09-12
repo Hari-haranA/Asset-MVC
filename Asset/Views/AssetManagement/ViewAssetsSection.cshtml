@@ -1,4 +1,5 @@
-﻿<h5 class="text-center p-3">View Asset Section</h5>
+﻿@* @model IEnumerable<Asset.Models.Assets>
+ *@<h5 class="text-center p-3">View Asset Section</h5>
 <section class="d-flex">
     <div>
         <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1">
@@ -16,36 +17,36 @@
 
 <section class="container-fluid bg-light mt-3 py-5">
     <p class="px-2"><b>Asset Type</b></p>
-    <a asp-controller="AssetManagement" asp-action="CreateAsset"><b class="ps-1">Add New Asset Type</b></a>
+    <a asp-controller="AssetManagement" asp-action="CreateSection"><b class="ps-1">Add New Asset Type</b></a>
     <div class="row mt-2">
         <div class="col-10">
+            <div id="dataContainer"></div>
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">ASSET CODE - NAME</th>
-                        <th scope="col">DEPRECIATION(%)</th>
-                        <th scope="col">ASSET SECTION CODE</th>
-                        <th scope="col">ASSET SECTION NAME</th>
+                        <th>Asset ID</th>
+                        <th>Asset Name</th>
+                        <th>Depreciation</th>
+                        <th>Section ID</th>
+                        <th>Section Name</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>001 - Furniture</td>
-                        <td>10%</td>
-                        <td>01</td>
-                        <td>Table</td>
-                    </tr>
+                <tbody id="table-body">
+                    <!-- Data will be displayed here -->
                 </tbody>
             </table>
         </div>
         <div class="col-2">
             <div class="d-inline-flex">
                 <a asp-action="EditSection" class="btn btn-primary" type="submit">Edit</a>
-                <a asp-controller="Dashboard" asp-action="Dashboard" class="btn btn-primary mx-3" type="submit">Back</a>
+                <a asp-controller="Dashboard" asp-action="Dashboard" class="btn btn-warning mx-3" type="submit">Back</a>
             </div>
         </div>
     </div>
 </section>
+
+
+
 <script>
     // Get all the radio buttons
     var radioButtons = document.querySelectorAll('input[name="inlineRadioOptions"]');

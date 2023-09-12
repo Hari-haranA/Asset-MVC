@@ -8,6 +8,7 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 
 // Add Identity services and configure them
 builder.Services.AddDbContext<LoginDbContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<AssetManagementDbContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<LoginDbContext>()
     .AddDefaultTokenProviders();

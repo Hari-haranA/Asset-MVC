@@ -5,8 +5,9 @@ namespace Asset.Controllers
 {
     public class SalesManagementController : Controller
     {
-        private AssetManagementDbContext db = new AssetManagementDbContext();
-
+        //private AssetManagementDbContext db = new AssetManagementDbContext();
+        public readonly AssetManagementDbContext db;
+        public SalesManagementController(AssetManagementDbContext context) { db = context; }
         // Action for Sales Entry (Create)
         public ActionResult CreateSale()
         {

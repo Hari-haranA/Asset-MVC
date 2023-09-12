@@ -22,7 +22,7 @@
         public int TO_BRANCH { get; set; }
 
         [ForeignKey("SUBSEC_ID")]
-        public virtual AssetSubSection AssetSubSection { get; set; }
+        public virtual Asset_Sub_Section AssetSubSection { get; set; }
 
         [ForeignKey("PID")]
         public virtual PBill PBill { get; set; }
