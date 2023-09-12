@@ -1,16 +1,19 @@
-﻿namespace Asset.Data
-{
+﻿
     using Asset.Models;
-    using System.Data.Entity;
-
+    //using System.Data.Entity;
+    using Microsoft.EntityFrameworkCore;
+   
+namespace Asset.Data
+{
     public class AssetManagementDbContext : DbContext
     {
-        public AssetManagementDbContext() : base("DefaultConnection")
+        public AssetManagementDbContext(DbContextOptions<AssetManagementDbContext>options) : base(options)
         {
+            ChangeTracker.LazyLoadingEnabled = false; // To disable lazy loading
         }
         public DbSet<Assets> Assets { get; set; }
-        public DbSet<AssetSection> Asset_Section { get; set; }
-        public DbSet<AssetSubSection> Asset_Sub_Section { get; set; }
+        public DbSet<Asset_Section> Asset_Section { get; set; }
+        public DbSet<Asset_Sub_Section> Asset_Sub_Section { get; set; }
         public DbSet<Branch> Branch { get; set; }
         public DbSet<Vendor> Vendor { get; set; }
         public DbSet<PurchaseEntry> Purchase_Entry { get; set; }

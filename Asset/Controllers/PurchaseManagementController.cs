@@ -5,8 +5,9 @@ namespace Asset.Controllers
 {
     public class PurchaseManagementController : Controller
     {
-        private AssetManagementDbContext db = new AssetManagementDbContext();
-
+        //public AssetManagementDbContext db = new AssetManagementDbContext();
+         public readonly AssetManagementDbContext db;
+        public PurchaseManagementController(AssetManagementDbContext context) {             db=context;   }
         // Action for Purchase Entry (Create)
         public ActionResult CreatePurchase()
         {

@@ -51,8 +51,8 @@
         //[ForeignKey("ASEC_ID")]
         //public virtual AssetSection AssetSection { get; set; }
 
-        [ForeignKey("ASUBSEC_ID")]
-        public virtual AssetSubSection AssetSubSection { get; set; }
+        //[ForeignKey("ASUBSEC_ID")]
+        //public virtual AssetSubSection AssetSubSection { get; set; }
     }
 
 }

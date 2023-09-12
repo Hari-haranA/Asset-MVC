@@ -36,11 +36,11 @@
 
         public byte[] INVOICE { get; set; }
 
-        [ForeignKey("BRCODE")]
-        public virtual Branch Branch { get; set; }
+        //[ForeignKey("BRCODE")]
+        //public virtual Branch Branch { get; set; }
 
-        [ForeignKey("VENDOR_CODE")]
-        public virtual Vendor Vendor { get; set; }
+        //[ForeignKey("VENDOR_CODE")]
+        //public virtual Vendor Vendor { get; set; }
 
         //[ForeignKey("A_ID")]
         //public virtual Assets Asset { get; set; }

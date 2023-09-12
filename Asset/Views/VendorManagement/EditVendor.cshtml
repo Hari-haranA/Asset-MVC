@@ -1,66 +1,68 @@
-﻿@model Views_VendorManagement_EditVendor;
-<h5 class="mt-3 text-center">Edit Vendor</h5>
+﻿@model Asset.Models.Vendor
 
+<h5 class="mt-3 text-center">Edit Vendor</h5>
+<form asp-action="EditVendor">
 <section class="bg-light mt-3 px-5 py-5">
 
     <div class="row">
         <div class="col-6">
             <div class="form-group">
-                <label class="control-label">VendorCode</label>
-                <input class="form-control" />
+                <label class="control-label">Vendor Code</label>
+                <input type="hidden" asp-for="Vendor_Code" class="form-control" />
             </div>
             <div class="form-group">
-                <label class="control-label">VName</label>
-                <input class="form-control" />
+                <label class="control-label">Company Name</label>
+                <input  asp-for="VName" class="form-control" />
             </div>
             <div class="form-group">
-                <label class="control-label">PersonName</label>
-                <input  class="form-control" />
+                <label class="control-label">Person Name</label>
+                <input  asp-for="Person_Name" class="form-control" />
             </div>
             <div class="form-group">
-                <label class="control-label">MobileNo</label>
-                <input class="form-control" />
+                <label class="control-label">Mobile Number</label>
+                <input asp-for="Mobile_No" class="form-control" />
             </div>
             <div class="form-group">
-                <label class="control-label">PhoneNo</label>
-                <input class="form-control" />
+                <label class="control-label">Phone Number</label>
+                <input  asp-for="Phone_No"  class="form-control" />
             </div>
             <div class="form-group">
-                <label class="control-label">VAddress</label>
-                <input class="form-control" />
+                <label class="control-label">Company Address</label>
+                <input asp-for="VAddress" class="form-control" />
             </div>
         </div>
 
         <div class="col-6">
             <div class="form-group">
                 <label class="control-label">City</label>
-                <input class="form-control" />
+                <input asp-for="City" class="form-control" />
             </div>
             <div class="form-group">
                 <label class="control-label">State</label>
-                <input class="form-control" />
+                <input asp-for="State" class="form-control" />
             </div>
             <div class="form-group">
-                <label class="control-label">GSTNo</label>
-                <input class="form-control" />
+                <label class="control-label">GST Number</label>
+                <input asp-for="GST_No" class="form-control" />
             </div>
             <div class="form-group">
-                <label class="control-label">PANNo</label>
-                <input class="form-control" />
+                <label class="control-label">PAN Number</label>
+                <input asp-for="PAN_No" class="form-control" />
             </div>
             <div class="form-group">
-                <label class="control-label">TINNo</label>
-                <input class="form-control" />
+                <label class="control-label">TIN Number</label>
+                <input asp-for="TIN_No" class="form-control" />
             </div>
         </div>
     </div>
     <section class="d-flex mt-3 justify-content-center">
         <div class="form-group">
-            <a asp-controller="VendorManagement" asp-action="DetailsVendor" class="btn btn-primary mx-3">Save</a>
+            <input type="submit" value="save" class="btn btn-success mx-3"  />
         </div>
         <div class="form-group">
-            <a asp-controller="Dashboard" asp-action="Dashboard" class="btn btn-primary mx-3">Cancel</a>
+            <a asp-controller="VendorManagement" asp-action="ViewVendors" class="btn btn-primary mx-3">Cancel</a>
         </div>
 
     </section>
 </section>
+</form>

@@ -5,8 +5,9 @@ namespace Asset.Controllers
 {
     public class StockDetailsController : Controller
     {
-        private AssetManagementDbContext db = new AssetManagementDbContext();
-
+        //private AssetManagementDbContext db = new AssetManagementDbContext();
+        public readonly AssetManagementDbContext db;
+        public StockDetailsController(AssetManagementDbContext context) { db = context; }
         // Action for viewing stock details (Branch Wise)
         public ActionResult BranchWiseStock()
         {

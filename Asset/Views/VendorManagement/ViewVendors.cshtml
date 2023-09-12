@@ -1,10 +1,10 @@
-﻿@model Vendor
+﻿@model IEnumerable<Asset.Models.Vendor>
 
 @{
     ViewData["Title"] = "ViewVendors";
 }
 
-<h5 class="text-center mt-3">CreateVendor</h5>
+<h5 class="text-center mt-3">View Vendors</h5>
 
 <section class="bg-light mt-3 px-5 py-5">
 
@@ -19,19 +19,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>001</td>
-                        <td>POTHYS</td>
-                    </tr>
+                    @foreach(var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Vendor_Code</td>
+                            <td>@item.VName</td>
+                            <td><a asp-controller="VendorManagement" asp-action="EditVendor" asp-route-id="@item.Vendor_Code" class="btn btn-warning">Edit</a></td>
+                            <td><a asp-controller="VendorManagement" asp-action="DetailsVendor" asp-route-id="@item.Vendor_Code" class="btn btn-info mx-3">Details</a></td>
+                            <td><a asp-controller="VendorManagement" asp-action="DeleteVendor" asp-route-id="@item.Vendor_Code" class="btn btn-danger">Delete</a></td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>
-        <div class="col-8">
-            <div class="d-inline-flex">
-                <a asp-controller="VendorManagement" asp-action="EditVendor" class="btn btn-primary">Edit</a>
-                <a asp-controller="VendorManagement" asp-action="DetailsVendor" class="btn btn-primary mx-3">Details</a>
-                <button class="btn btn-primary" type="submit">Delete</button>
+            <div class="d-inline-flex justify-content-end">
+                <a asp-controller="Dashboard" asp-action="Dashboard" class="btn btn-secondary mx-3">Back</a>
             </div>
-        </div>
     </div>
 </section>

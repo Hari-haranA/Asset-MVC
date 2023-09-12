@@ -5,8 +5,9 @@ namespace Asset.Controllers
 {
     public class ReportsController : Controller
     {
-        private AssetManagementDbContext db = new AssetManagementDbContext();
-
+        // private AssetManagementDbContext db = new AssetManagementDbContext();
+        public readonly AssetManagementDbContext db;
+        public ReportsController(AssetManagementDbContext context) { db = context; }
         // Action for Asset Transaction List Report
         public ActionResult AssetTransactionList()
         {

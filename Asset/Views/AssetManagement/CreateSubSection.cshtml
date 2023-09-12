@@ -17,11 +17,9 @@
         <div class="col-6">
             <div class="form-group">
                 <label class="control-label d-flex">Asset Type</label>
-                <select class="form-select" aria-label="Default select example">
-                <option selected>001 - Furniture</option>
-                <option value="1">002 - Machine</option>
-                <option value="2">003 - Automobiles</option>
-            </select>
+                <select class="form-select" id="assetTypeDropdown" aria-label="Asset Type">
+                    <option value="">Select Asset Type</option>
+                </select>
             </div>
             </div></div>
 
@@ -30,10 +28,8 @@
               <div class="col-6">
             <div class="form-group">
                 <label class="control-label d-flex">Asset Section Type</label>
-                <select class="form-select" aria-label="Default select example">
-                <option selected>001 - Table</option>
-                <option value="1">002 - Computer</option>
-                <option value="2">003 - </option>
+                <select class="form-select" id="assetTypeDropdown1" aria-label="Asset Section Type">
+                <option value="">Select Asset Section Type</option>
             </select>
             </div>
             </div>
@@ -56,8 +52,74 @@
     <a asp-action="ViewAssetsSubSection" class="btn btn-primary">Save</a>
     <a asp-controller="Dashboard" asp-action="Dashboard" class="btn btn-primary mx-3">Cancel</a>
     </div>
-</section>
+    <script>
+    // Function to populate the asset type dropdown
+    function populateAssetTypeDropdown() {
+        console.log("Populating asset type dropdown...");
+        const assetTypeDropdown = document.getElementById("assetTypeDropdown");
 
+        // Make an AJAX request to fetch asset types
+        fetch("/AssetManagement/sectionjson")
+            .then((response) => response.json())
+            .then((data) => {
+                // Log the retrieved data to the console for debugging
+                console.log("Retrieved data:", data);
+
+                // Iterate through the retrieved asset types and add them to the dropdown
+                data.forEach((asset) => {
+                    const option = document.createElement("option");
+                    option.value = asset.assetId; // Use the correct property name
+                   // console.log("Asset Id:", asset.AssetId);
+                   // console.log("Asset Name:", asset.AssetName);
+                    option.text = `${asset.assetId} - ${asset.assetName}`; // Use the correct property name
+                    assetTypeDropdown.appendChild(option);
+                });
+            })
+            .catch((error) => {
+                // Log any errors to the console for debugging
+                console.error("Error fetching asset types: ", error);
+            });
+    }
+
+    // Call the function to populate the asset type dropdown
+    populateAssetTypeDropdown();
+
+</script>
+</section>
+ <script>
+    // Function to populate the asset type dropdown
+    function populateAssetTypeDropdown() {
+        console.log("Populating asset type dropdown...");
+        const assetTypeDropdown = document.getElementById("assetTypeDropdown1");
+
+        // Make an AJAX request to fetch asset types
+        fetch("/AssetManagement/subsectionjson")
+            .then((response) => response.json())
+            .then((data) => {
+                // Log the retrieved data to the console for debugging
+                console.log("Retrieved data:", data);
+
+                // Iterate through the retrieved asset types and add them to the dropdown
+                data.forEach((asset) => {
+                    const option = document.createElement("option");
+                    option.value = asset.assetId; // Use the correct property name
+                   // console.log("Asset Id:", asset.AssetId);
+                   // console.log("Asset Name:", asset.AssetName);
+                    option.text = `${asset.sectionId} - ${asset.sectionName}`; // Use the correct property name
+                    assetTypeDropdown.appendChild(option);
+                });
+            })
+            .catch((error) => {
+                // Log any errors to the console for debugging
+                console.error("Error fetching asset types: ", error);
+            });
+    }
+
+    // Call the function to populate the asset type dropdown
+    populateAssetTypeDropdown();
+
+
+</script>
                 <script>
     // Get all the radio buttons
     var radioButtons = document.querySelectorAll('input[name="inlineRadioOptions"]');

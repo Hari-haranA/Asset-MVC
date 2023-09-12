@@ -37,11 +37,11 @@
         [Column(TypeName = "Money")]
         public decimal SALEAMOUNT { get; set; }
 
-        [ForeignKey("SID")]
-        public virtual SaleEntry SaleEntry { get; set; }
+        //[ForeignKey("SID")]
+        //public virtual SaleEntry SaleEntry { get; set; }
 
-        [ForeignKey("VENDOR_CODE")]
-        public virtual Vendor Vendor { get; set; }
+        //[ForeignKey("VENDOR_CODE")]
+        //public virtual Vendor Vendor { get; set; }
     }
 
 }
