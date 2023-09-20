@@ -24,7 +24,7 @@
                         <tr>
                             <th>Asset ID</th>
                             <th>Asset Name</th>
-                            <th>Depreciation</th>
+                            <th>Depreciation(%)</th>
                             <th>Section ID</th>
                             <th>Section Name</th>
                             <th>Sub Section ID</th>
@@ -39,7 +39,8 @@
         </div>
         <div class="col-2">
             <div class="d-inline-flex">
-                <a asp-controller="Dashboard" asp-action="Dashboard" class="btn btn-warning mx-3" type="submit">Back</a>
+                <a asp-controller="Dashboard" asp-action="Dashboard" class="btn btn-warning" type="submit">Back</a>
+                <a asp-controller="AssetManagement" asp-action="Pdf" class="btn btn-success mx-1" type="submit">GeneratePDF</a>
             </div>
         </div>
     </div>

@@ -1,4 +1,4 @@
-﻿@model PurchaseEntry
+﻿@model CreatePurchaseView
 @{
     ViewData["Title"] = "CreatePurchase";
 }
@@ -18,13 +18,15 @@
                 <select class="form-select" id="Dropdown" aria-label="Branch">
                     <option value="">Select Branch</option>
                 </select>
+                <input type="hidden" asp-for="BRCODE" id="Branch_Id" name="Branch_Id" />
                 </div>
             <div class="form-group">
                 <label class="control-label d-flex">Company Code</label>
                 <select class="form-select" id="Dropdown1" aria-label="Vendor">
                     <option value="">Select Vendor</option>
                 </select>
-                <a class="btn btn-link">Add Company</a>
+                <input type="hidden" asp-for="VENDOR_CODE" id="Vendor_Id" name="Vendor_Id" />
+                <a asp-controller="VendorManagement" asp-action="CreateVendor" class="btn btn-link">Add Company</a>
             </div>
             <div class="form-group">
                 <label class="control-label">Entry Date</label>
@@ -45,25 +47,25 @@
                 <select class="form-select" id="assetTypeDropdown1" aria-label="Asset Section Type">
                     <option value="">Select Asset Section Type</option>
                 </select>
-                <input type="hidden" asp-for="ASEC_ID" id="Asset_Id" name="Asset_Id" />
+                <input type="hidden" asp-for="ASEC_ID" id="Section_Id" name="Section_Id" />
             </div>
             <div class="form-group col-2">
                 <label class="control-label">Asset Sub Section Type</label>
                 <select class="form-select" id="assetTypeDropdown2" aria-label="Asset Sub Section Type">
                     <option selected>Select Asset Sub Section Type </option>
                 </select>
-                <input type="hidden" asp-for="ASSUB_ID" id="Asset_Id" name="Asset_Id" />
+                <input type="hidden" asp-for="ASSUB_ID" id="SubSection_Id" name="SubSection_Id" />
             </div>
             <div class="form-group mx-2 col-2">
                 <label class="control-label">Quantity</label>
-                <input class="form-control" />
+                <input type="number" asp-for="QUANTITY" />
             </div>
             <div class="mx-2">
                 <a class="btn btn-link">Add</a>
             </div>
             <div class="form-group">
-            <label>Invoice</label>
-            <input type="file" class="form-control-file" id="exampleform" />
+            <label class="control-label">Product Price</label>
+                <input type="number"  class="form-control" />
             </div>
         </div>
     </div>
@@ -74,27 +76,31 @@
         <div class="col-6">
             <div class="form-group">
                 <label class="control-label">Company Name</label>
-                <input class="form-control" />
+                <input type="text" asp-for="COMPANY_NAME" class="form-control" />
             </div>
             <div class="form-group">
                 <label class="control-label">Bill Number</label>
-                <input class="form-control" />
+                <input type="number" asp-for=Bill_NO class="form-control" />
             </div>
             <div class="form-group">
                 <label class="control-label">Bill Date</label>
-                <input class="form-control" />
+                <input type="date" asp-for=BILL_DATE class="form-control" />
             </div>
             <div class="form-group">
                 <label class="control-label">Purchase Amount</label>
-                <input class="form-control" />
+                <input type="number" asp-for="PAMOUNT" class="form-control" />
             </div>
             <div class="form-group">
                 <label class="control-label">Total Amount</label>
-                <input class="form-control" />
+                <input type="number" asp-for=TAMOUNT class="form-control" />
             </div>
             <div class="form-group">
                 <label class="control-label">Product Description</label>
-                <input class="form-control" />
+                <input type="text" asp-for=PRODUCT_DESCRIPTION class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Invoice</label>
+                <input type="file" class="form-control-file" id="exampleform" />
             </div>
         </div></div>
     <div class="mt-3">
@@ -108,6 +114,38 @@
     document.getElementById('assetTypeDropdown').addEventListener('change', function () {
         const selectedAssetId = this.value; // Get the selected value
         const modelAssetId = document.getElementById('Asset_Id'); // Get the hidden input for model's Asset_Id
+        if (selectedAssetId !== '') {
+            // Set the selectedAssetId as the value of the hidden input field
+            modelAssetId.value = selectedAssetId;
+            console.log('Selected Asset_ID:', selectedAssetId);
+
+            // Optionally, you can trigger any additional actions here
+        } else {
+            // Handle the case where "Select Asset Type" is chosen (optional)
+            modelAssetId.value = ''; // Clear the value
+        }
+    });
+</script>
+<script>
+    document.getElementById('assetTypeDropdown1').addEventListener('change', function () {
+        const selectedAssetId = this.value; // Get the selected value
+        const modelAssetId = document.getElementById('Section_Id'); // Get the hidden input for model's Asset_Id
+        if (selectedAssetId !== '') {
+            // Set the selectedAssetId as the value of the hidden input field
+            modelAssetId.value = selectedAssetId;
+            console.log('Selected Asset_ID:', selectedAssetId);
+
+            // Optionally, you can trigger any additional actions here
+        } else {
+            // Handle the case where "Select Asset Type" is chosen (optional)
+            modelAssetId.value = ''; // Clear the value
+        }
+    });
+</script>
+<script>
+    document.getElementById('assetTypeDropdown2').addEventListener('change', function () {
+        const selectedAssetId = this.value; // Get the selected value
+        const modelAssetId = document.getElementById('SubSection_Id'); // Get the hidden input for model's Asset_Id
         if (selectedAssetId !== '') {
             // Set the selectedAssetId as the value of the hidden input field
             modelAssetId.value = selectedAssetId;
@@ -236,6 +274,40 @@
                     // console.log("Asset Id:", asset.AssetId);
                     // console.log("Asset Name:", asset.AssetName);
                     option.text = `${asset.sectionId} - ${asset.sectionName}`; // Use the correct property name
+                    assetTypeDropdown.appendChild(option);
+                });
+            })
+            .catch((error) => {
+                // Log any errors to the console for debugging
+                console.error("Error fetching asset types: ", error);
+            });
+    }
+
+    // Call the function to populate the asset type dropdown
+    populateAssetTypeDropdown();
+
+
+</script>
+<script>
+    // Function to populate the asset type dropdown
+    function populateAssetTypeDropdown() {
+        console.log("Populating asset type dropdown...");
+        const assetTypeDropdown = document.getElementById("assetTypeDropdown2");
+
+        // Make an AJAX request to fetch asset types
+        fetch("/AssetManagement/asubsectionjson")
+            .then((response) => response.json())
+            .then((data) => {
+                // Log the retrieved data to the console for debugging
+                console.log("Retrieved data:", data);
+
+                // Iterate through the retrieved asset types and add them to the dropdown
+                data.forEach((asset) => {
+                    const option = document.createElement("option");
+                    option.value = asset.subSecId; // Use the correct property name
+                    // console.log("Asset Id:", asset.AssetId);
+                    // console.log("Asset Name:", asset.AssetName);
+                    option.text = `${asset.subSecId} - ${asset.subSecName}`; // Use the correct property name
                     assetTypeDropdown.appendChild(option);
                 });
             })
