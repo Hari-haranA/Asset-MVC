@@ -8,6 +8,20 @@ namespace Asset.Controllers
         //public AssetManagementDbContext db = new AssetManagementDbContext();
          public readonly AssetManagementDbContext db;
         public PurchaseManagementController(AssetManagementDbContext context) {             db=context;   }
+        [HttpGet]
+        public ActionResult branchjson()
+        {
+            var asset = db.Branch.ToList();
+            var response = asset.Select(x => new { branchid = x.BrCode , branchname = x.BrName }); // create JSON object
+            return Json(response);
+        }
+        [HttpGet]
+        public ActionResult vjson()
+        {
+            var asset = db.Vendor.ToList();
+            var response = asset.Select(x => new { vid = x.Vendor_Code, vname = x.VName }); // create JSON object
+            return Json(response);
+        }
         // Action for Purchase Entry (Create)
         public ActionResult CreatePurchase()
         {

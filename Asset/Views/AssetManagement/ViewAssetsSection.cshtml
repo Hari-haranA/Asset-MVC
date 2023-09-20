@@ -17,34 +17,76 @@
 
 <section class="container-fluid bg-light mt-3 py-5">
     <p class="px-2"><b>Asset Type</b></p>
-    <a asp-controller="AssetManagement" asp-action="CreateSection"><b class="ps-1">Add New Asset Type</b></a>
+    <a asp-controller="AssetManagement" asp-action="CreteSection"><b class="ps-1">Add New Asset Type</b></a>
     <div class="row mt-2">
         <div class="col-10">
-            <div id="dataContainer"></div>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Asset ID</th>
-                        <th>Asset Name</th>
-                        <th>Depreciation</th>
-                        <th>Section ID</th>
-                        <th>Section Name</th>
-                    </tr>
-                </thead>
-                <tbody id="table-body">
-                    <!-- Data will be displayed here -->
-                </tbody>
-            </table>
+            <div id="dataContainer">
+                <table class="table" id="table">
+                    <thead>
+                        <tr>
+                            <th>Asset ID</th>
+                            <th>Asset Name</th>
+                            <th>Depreciation</th>
+                            <th>Section ID</th>
+                            <th>Section Name</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body">
+                        <!-- Data will be displayed here dynamically -->
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div class="col-2">
             <div class="d-inline-flex">
-                <a asp-action="EditSection" class="btn btn-primary" type="submit">Edit</a>
                 <a asp-controller="Dashboard" asp-action="Dashboard" class="btn btn-warning mx-3" type="submit">Back</a>
             </div>
         </div>
     </div>
 </section>
+<script>
+    function populateTable() {
+        console.log("populateTable() called");
+        const tableBody = document.getElementById('table-body');
+        tableBody.innerHTML = ''; // Clear existing rows
+        // Make an AJAX request to fetch the JSON data from the server
+        fetch('/AssetManagement/viewsectionjson')
+            .then((response) => response.json())
+            .then((data) => {
+                console.log('Data received: ', data);
+                // Populate the table with the retrieved JSON data
+                data.forEach((item) => {
+                    const row = document.createElement('tr');
 
+                    const assetIdCell = document.createElement('td');
+                    assetIdCell.textContent = item.assetId;
+                    row.appendChild(assetIdCell);
+
+                    const assetNameCell = document.createElement('td');
+                    assetNameCell.textContent = item.assetName;
+                    row.appendChild(assetNameCell);
+
+                    const depreciationCell = document.createElement('td');
+                    depreciationCell.textContent = item.depreciation;
+                    row.appendChild(depreciationCell);
+
+                    const sectionIdCell = document.createElement('td');
+                    sectionIdCell.textContent = item.sectionId || '';
+                    row.appendChild(sectionIdCell);
+
+                    const sectionNameCell = document.createElement('td');
+                    sectionNameCell.textContent = item.sectionName || '';
+                    row.appendChild(sectionNameCell);
+
+                    tableBody.appendChild(row);
+                });
+            })
+            .catch((error) => {
+                console.error('Error fetching data: ', error);
+            });
+    }
+    populateTable();
+</script>
 
 
 <script>

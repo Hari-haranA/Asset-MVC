@@ -90,10 +90,17 @@ namespace Asset.Controllers
             var response = section.Select(x => new { SectionId = x.Section_Id, SectionName = x.Name }); // create JSON object
             return Json(response);
         }
+        [HttpGet]
+        public ActionResult asubsectionjson()
+        {
+            var sub_Section = db.Asset_Sub_Section.ToList();
+            var response = sub_Section.Select(x => new { SubSecId = x.SubSec_Id, SubSecName = x.Name }); // create JSON object
+            return Json(response);
+        }
         [HttpPost]
         public async Task<ActionResult> CreateSection(CreateSectionView model)
         {
-            if (ModelState!=null)
+            if (ModelState.IsValid)
             {
                 // Create a new AssetSection object and set its properties
                 var assetSection = new Asset_Section
@@ -125,16 +132,20 @@ namespace Asset.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<ActionResult> CreateSubSection(Asset_Sub_Section subsection)
+        public async Task<ActionResult> CreateSubSection(CreateSubSectionView model)
         {
-            if (ModelState.IsValid)
+            if (ModelState!=null)
             {
-                db.Asset_Sub_Section.Add(subsection);
+                var assetSubSection = new Asset_Sub_Section
+                {
+                    Name = model.SubSectionName, //using model createsubsectionview
+                    Section_Id = model.Section_Id
+                };
+                db.Asset_Sub_Section.Add(assetSubSection);
                 await db.SaveChangesAsync();
                 return RedirectToAction("ViewAssetsSubSection");
             }
-
-            return View(subsection);
+            return View();
         }
 
         // Action for viewing assets
@@ -145,8 +156,14 @@ namespace Asset.Controllers
             //var assets = await db.Assets.ToListAsync();
             //return View(assets);
         }
-        
-        public async Task<ActionResult> ViewAssetsSection()
+    
+        public  async Task<ActionResult> ViewAssetsSection()
+        {
+            return View(); 
+                              
+        }
+
+        public async Task<ActionResult> viewsectionjson()
         {
             var queryResult = from asset in db.Assets
                               join section in db.Asset_Section
@@ -161,20 +178,56 @@ namespace Asset.Controllers
                                   SectionId = section != null ? section.Section_Id : (int?)null,
                                   SectionName = section != null ? section.Name : null
                               };
-
-                                var resultList = queryResult.ToList();
-                               // Serialize the query result to JSON
-                                 string jsonResult = JsonSerializer.Serialize(resultList);
-            // Return the JSON result
+            var resultList = queryResult.ToList();
+            var response = resultList.Select(x => new { AssetId = x.AssetId, AssetName = x.AssetName, Depreciation = x.Depreciation, SectionId = x.SectionId, SectionName = x.SectionName }); // create JSON object
+                                                                                                                                                                                              // Serialize the query result to JSON
+                                                                                                                                                                                              //string jsonResult = JsonSerializer.Serialize(resultList);
+                                                                                                                                                                                              // Return the JSON result
             return Json(resultList);
-                               //return resultList != null ?
-                               //       View(resultList) : Problem("Table is Null.");
+
         }
+
         public async Task<ActionResult> ViewAssetsSubSection()
         {
-            return db.Asset_Sub_Section != null ?
-                View(await db.Asset_Sub_Section.ToListAsync()) : Problem("Table is Null.");
+              return  View();
         }
+        public async Task<ActionResult> viewsubsectionjson()
+        {
+            var queryResult = from asset in db.Assets
+                              join section in db.Asset_Section 
+                              on asset.Asset_Id equals section.Asset_Id 
+                             // from Section in db.Asset_Section
+                              join subSection in db.Asset_Sub_Section
+                              on section.Section_Id equals subSection.SubSec_Id into joinedAssets
+                              from subSection in joinedAssets.DefaultIfEmpty()
+                              orderby asset.Asset_Id // Add this line to order by AssetId
+                              select new
+                              {
+                                  AssetId = asset.Asset_Id,
+                                  AssetName = asset.Name,
+                                  Depreciation = asset.Depreciation,
+                                  SectionId = section != null ? section.Section_Id : (int?)null,
+                                  SectionName = section != null ? section.Name : null,
+                                  SubSectionId = subSection != null ? subSection.SubSec_Id : (int?)null,
+                                  SubSectionName = subSection != null ? subSection.Name : null
+                              };
+            var resultList = queryResult.ToList();
+            var response = resultList.Select(x => new { 
+                AssetId = x.AssetId,
+                AssetName = x.AssetName,
+                Depreciation = x.Depreciation,
+                SectionId = x.SectionId,
+                SectionName = x.SectionName,
+                SubSectionId = x.SubSectionId,
+                SubSectionName = x.SubSectionName
+                    }); // create JSON object
+                                                                                                                                                                                              // Serialize the query result to JSON
+                                                                                                                                                                                              //string jsonResult = JsonSerializer.Serialize(resultList);
+                                                                                                                                                                                              // Return the JSON result
+             return Json(resultList);
+
+        }
+
 
         public ActionResult EditAsset()
         {

@@ -24,6 +24,7 @@
                 <select class="form-select" id="assetTypeDropdown" aria-label="Asset Type">
                     <option value="">Select Asset Type</option>
                 </select>
+                    <input type="hidden" asp-for="Asset_Id" id="Asset_Id" name="Asset_Id"  />
             </div>
         </div>
 </div>
@@ -65,10 +66,18 @@
 </section>
 </form>
 <script>
-    document.querySelector('form').addEventListener('submit', function (event) {
-        const assetTypeDropdown = document.getElementById('assetTypeDropdown');
-        if (assetTypeDropdown.value === '') {
-            event.preventDefault(); // Prevent form submission if no asset type is selected
+    document.getElementById('assetTypeDropdown').addEventListener('change', function () {
+        const selectedAssetId = this.value; // Get the selected value
+        const modelAssetId = document.getElementById('Asset_Id'); // Get the hidden input for model's Asset_Id
+        if (selectedAssetId !== '') {
+            // Set the selectedAssetId as the value of the hidden input field
+            modelAssetId.value = selectedAssetId;
+            console.log('Selected Asset_ID:', selectedAssetId);
+
+            // Optionally, you can trigger any additional actions here
+        } else {
+            // Handle the case where "Select Asset Type" is chosen (optional)
+            modelAssetId.value = ''; // Clear the value
         }
     });
 </script>
@@ -89,7 +98,6 @@
                 data.forEach((asset) => {
                     const option = document.createElement("option");
                     option.value = asset.assetId; // Use the correct property name
-
                    // console.log("Asset Id:", asset.AssetId);
                    // console.log("Asset Name:", asset.AssetName);
                     option.text = `${asset.assetId} - ${asset.assetName}`; // Use the correct property name

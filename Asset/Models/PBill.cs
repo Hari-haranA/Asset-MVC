@@ -9,7 +9,7 @@
         [Key]
         public int PBID { get; set; }
 
-        [Required]
+      //  [Required]
         public int PID { get; set; }
 
         [Required]
