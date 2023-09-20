@@ -15,12 +15,16 @@ namespace Asset.Controllers
             return View();
         }
 
+        public ActionResult EditSales() {
+            return View();
+        }
+
         // Action for viewing sales entries
         public ActionResult ViewSales()
         {
             // Implement logic for viewing sales entries (search by branch or sale ID)
-            var sales = db.Sale_Entry.ToList();
-            return View(sales);
+           // var sales = db.Sale_Entry.ToList();
+            return View();
         }
 
         // Other actions for CRUD operations in sales management
