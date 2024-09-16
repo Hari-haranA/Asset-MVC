@@ -35,7 +35,7 @@ Adapt the module to fit your unique requirements. Whether you need specific repo
 ## **How to Get Started**
 
 1. **Contact Us:** Reach out via email at [haran3957@gmail.com](mailto:haran3957@gmail.com) or call/WhatsApp at **+91 9003578329** to discuss your needs and schedule a demo.
-2. **Integration:** Our team will assist with the integration process, ensuring a smooth transition to the new module.
+2. **Integration:** I will assist with the integration process, ensuring a smooth transition to the new module.
 3. **Customization:** Work with us to customize the module to fit your specific requirements.
 4. **Go Live:** Start managing your assets more effectively and efficiently.
 
